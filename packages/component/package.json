@@ -1,0 +1,25 @@
+{
+  "name": "@rich-dime/component",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rich-dime/common": "workspace:*",
+    "@rn-primitives/slot": "~1.2.0",
+    "@tamagui/core": "2.0.0-rc.0",
+    "class-variance-authority": "^0.7.1",
+    "tamagui": "2.0.0-rc.0"
+  },
+  "peerDependencies": {
+    "@quidone/react-native-wheel-picker": ">=1.0.0",
+    "lucide-react-native": "^0.545.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": ">=0.72.0",
+    "react-native-reanimated": "^4.0.0",
+    "react-native-safe-area-context": ">=5.4.0"
+  }
+}

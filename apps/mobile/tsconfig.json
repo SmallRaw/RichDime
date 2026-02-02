@@ -1,0 +1,24 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "jsxImportSource": "nativewind",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@rich-dime/kit": ["../../packages/kit/src"],
+      "@rich-dime/common": ["../../packages/common/src"],
+      "@rich-dime/component": ["../../packages/component/src"],
+      "@rich-dime/adapters": ["../../packages/adapters/src"],
+      "@rich-dime/database": ["../../packages/database/src"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts",
+    "../../packages/*/src/**/*"
+  ]
+}

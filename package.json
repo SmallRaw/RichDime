@@ -1,0 +1,23 @@
+{
+  "name": "@rich-dime/workspace",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @rich-dime/mobile dev",
+    "android": "pnpm --filter @rich-dime/mobile android",
+    "ios": "pnpm --filter @rich-dime/mobile ios",
+    "web": "pnpm --filter @rich-dime/mobile web",
+    "clean": "pnpm --filter @rich-dime/mobile clean",
+    "clean:all": "rm -rf apps/mobile/.expo apps/mobile/node_modules/.cache && pnpm --filter @rich-dime/mobile clean",
+    "android:verbose": "EXPO_DEBUG=true pnpm --filter @rich-dime/mobile android"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "~5.9.2"
+  }
+}

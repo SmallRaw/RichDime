@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@rich-dime/kit": ["./packages/kit/src"],
+      "@rich-dime/common": ["./packages/common/src"],
+      "@rich-dime/component": ["./packages/component/src"],
+      "@rich-dime/adapters": ["./packages/adapters/src"]
+    }
+  },
+  "include": [],
+  "exclude": ["node_modules", "demo"]
+}

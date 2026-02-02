@@ -1,0 +1,36 @@
+{
+  "name": "@rich-dime/kit",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./screens": "./src/screens/index.ts",
+    "./screens/*": "./src/screens/*/index.ts",
+    "./features": "./src/features/index.ts",
+    "./features/*": "./src/features/*/index.ts",
+    "./hooks": "./src/hooks/index.ts",
+    "./providers": "./src/providers/index.ts",
+    "./layouts": "./src/layouts/index.ts",
+    "./navigation": "./src/navigation/index.ts"
+  },
+  "dependencies": {
+    "@rich-dime/adapters": "workspace:*",
+    "@rich-dime/common": "workspace:*",
+    "@rich-dime/component": "workspace:*",
+    "@rich-dime/database": "workspace:*",
+    "@tanstack/react-query": "^5",
+    "jotai": "^2",
+    "zustand": "^5"
+  },
+  "peerDependencies": {
+    "@rn-primitives/portal": "~1.3.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": ">=0.72.0",
+    "@react-navigation/native": "^7.0.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0",
+    "lucide-react-native": "~0.500.0"
+  }
+}

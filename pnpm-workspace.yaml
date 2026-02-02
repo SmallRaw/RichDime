@@ -1,0 +1,6 @@
+packages:
+  - apps/*
+  - packages/*
+
+patchedDependencies:
+  expo-sqlite@15.2.14: patches/expo-sqlite@15.2.14.patch
