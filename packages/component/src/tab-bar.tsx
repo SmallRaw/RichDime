@@ -73,11 +73,8 @@ function TabItem({
         color={active ? colors.foreground : colors.mutedForeground}
       />
       <Text
-        variant="secondary"
-        color={active ? colors.foreground : colors.mutedForeground}
-        style={{
-          fontFamily: active ? 'NotoSansSC_500Medium' : 'NotoSansSC_400Regular',
-        }}
+        variant={active ? 'tabLabelActive' : 'tabLabel'}
+        color={active ? colors.foreground : undefined}
       >
         {label}
       </Text>

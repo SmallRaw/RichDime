@@ -24,10 +24,12 @@ import { Text as TamaguiText } from 'tamagui';
 // Font sizes matching design tokens
 const FONT_SIZES = {
   xs: 11,
+  badge: 12,
   sm: 13,
   base: 15,
   lg: 17,
   xl: 20,
+  emoji: 22,
   '2xl': 24,
   '3xl': 30,
   '4xl': 36,
@@ -55,6 +57,10 @@ export type TextVariant =
   | 'description'
   | 'overline'
   | 'secondary'
+  | 'badge'
+  | 'emoji'
+  | 'tabLabel'
+  | 'tabLabelActive'
   | 'amount'
   | 'amountLg'
   | 'amountCurrency'
@@ -160,6 +166,27 @@ const VARIANT_STYLES: Record<TextVariant, {
     fontSize: FONT_SIZES.xs,
     fontFamily: FONTS.sans,
     color: '$mutedForeground',
+  },
+
+  badge: {
+    fontSize: FONT_SIZES.badge,
+    fontFamily: FONTS.sansSemibold,
+  },
+
+  emoji: {
+    fontSize: FONT_SIZES.emoji,
+    fontFamily: FONTS.sans,
+  },
+
+  tabLabel: {
+    fontSize: FONT_SIZES.xs,
+    fontFamily: FONTS.sans,
+    color: '$mutedForeground',
+  },
+
+  tabLabelActive: {
+    fontSize: FONT_SIZES.xs,
+    fontFamily: FONTS.sansMedium,
   },
 
   amount: {

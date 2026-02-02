@@ -43,7 +43,7 @@ function CategoryListItem({
     >
       {/* Left: emoji + name */}
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-        <Text style={{ fontSize: 22 }}>{emoji}</Text>
+        <Text variant="emoji">{emoji}</Text>
         <Text variant="bodyMedium">{name}</Text>
       </View>
 

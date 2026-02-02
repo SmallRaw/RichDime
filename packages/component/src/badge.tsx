@@ -85,13 +85,7 @@ function Badge({ children, variant = 'default', style }: BadgeProps) {
         style,
       ]}
     >
-      <Text
-        style={{
-          fontSize: 12,
-          fontFamily: 'NotoSansSC_600SemiBold',
-        }}
-        color={getTextColor()}
-      >
+      <Text variant="badge" color={getTextColor()}>
         {children}
       </Text>
     </View>
