@@ -1,4 +1,4 @@
-import { Button, Icon } from '@rich-dime/component';
+import { Button, Icon, useThemeColors } from '@rich-dime/component';
 // import { Stack } from 'expo-router';
 import { MoonStarIcon, SunIcon } from 'lucide-react-native';
 import { View } from 'react-native';
@@ -20,10 +20,12 @@ const THEME_ICONS = {
  * Home screen - main landing screen
  */
 export function HomeScreen() {
+  const colors = useThemeColors();
+
   return (
     <>
       {/* <Stack.Screen options={SCREEN_OPTIONS} /> */}
-      <View className="flex-1">
+      <View style={{ flex: 1, backgroundColor: colors.background }}>
         <WelcomeFeature />
       </View>
     </>
@@ -32,15 +34,16 @@ export function HomeScreen() {
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const colors = useThemeColors();
 
   return (
     <Button
       onPress={toggleTheme}
       size="icon"
       variant="ghost"
-      className="ios:size-9 rounded-full web:mx-4"
+      style={{ width: 36, height: 36, borderRadius: 9999 }}
     >
-      <Icon as={THEME_ICONS[theme]} className="size-5" />
+      <Icon as={THEME_ICONS[theme]} size={20} color={colors.foreground} />
     </Button>
   );
 }

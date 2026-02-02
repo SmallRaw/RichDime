@@ -147,15 +147,15 @@ export function CategoryFormScreen({
   }, [category, removeCategory, onSuccess, onClose]);
 
   return (
-    <View className="bg-background" style={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
+    <View style={{ backgroundColor: themeColors.background, borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
       {/* Header */}
-      <View className="flex-row items-center justify-between px-4 py-3">
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12 }}>
         {/* Close Button - styled differently for add vs edit mode */}
         <Pressable
           onPress={onClose}
-          className={`h-8 w-8 items-center justify-center ${mode === 'edit' ? 'rounded-full bg-muted' : ''}`}
+          style={{ height: 32, width: 32, alignItems: 'center', justifyContent: 'center', borderRadius: mode === 'edit' ? 9999 : 0, backgroundColor: mode === 'edit' ? themeColors.muted : 'transparent' }}
         >
-          <Icon as={X} size={18} className="text-muted-foreground" />
+          <Icon as={X} size={18} color={themeColors.mutedForeground} />
         </Pressable>
 
         {/* Segment Control */}
@@ -169,38 +169,36 @@ export function CategoryFormScreen({
         {mode === 'edit' ? (
           <Pressable
             onPress={handleDelete}
-            className="h-8 w-8 items-center justify-center rounded-full"
-            style={{ backgroundColor: themeColors.destructive }}
+            style={{ height: 32, width: 32, alignItems: 'center', justifyContent: 'center', borderRadius: 9999, backgroundColor: themeColors.destructive }}
           >
-            <Icon as={Trash2} size={16} className="text-white" />
+            <Icon as={Trash2} size={16} color="#ffffff" />
           </Pressable>
         ) : (
-          <View className="h-8 w-8" />
+          <View style={{ height: 32, width: 32 }} />
         )}
       </View>
 
       {/* Content */}
-      <View className="items-center gap-6 px-4 pb-4 pt-8">
+      <View style={{ alignItems: 'center', gap: 24, paddingHorizontal: 16, paddingBottom: 16, paddingTop: 32 }}>
         {/* Emoji Preview */}
         <Pressable
           onPress={() => setShowEmojiPicker(true)}
-          className="h-[72px] w-[72px] items-center justify-center rounded-lg bg-muted"
+          style={{ height: 72, width: 72, alignItems: 'center', justifyContent: 'center', borderRadius: 8, backgroundColor: themeColors.muted }}
         >
-          <Text className="text-4xl">{emoji}</Text>
+          <Text style={{ fontSize: 36 }}>{emoji}</Text>
         </Pressable>
 
         {/* Input Row */}
-        <View className="w-full flex-row items-center gap-3">
+        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', gap: 12 }}>
           {/* Color Picker */}
           <Pressable
             onPress={() => setShowColorPicker(true)}
-            className="h-8 w-8 rounded-lg"
-            style={{ backgroundColor: color }}
+            style={{ height: 32, width: 32, borderRadius: 8, backgroundColor: color }}
           />
 
           {/* Name Input */}
           <TextInput
-            className="h-11 flex-1 rounded-lg bg-muted px-3 text-[15px] text-foreground"
+            style={{ height: 44, flex: 1, borderRadius: 8, backgroundColor: themeColors.muted, paddingHorizontal: 12, fontSize: 15, color: themeColors.foreground }}
             placeholder="Category Name"
             placeholderTextColor={themeColors.mutedForeground}
             value={name}
@@ -213,7 +211,7 @@ export function CategoryFormScreen({
           <Pressable
             onPress={handleSubmit}
             disabled={isSubmitting}
-            className="h-11 w-11 items-center justify-center rounded-lg bg-foreground"
+            style={{ height: 44, width: 44, alignItems: 'center', justifyContent: 'center', borderRadius: 8, backgroundColor: themeColors.foreground }}
           >
             {isSubmitting ? (
               <ActivityIndicator size="small" color={themeColors.background} />
@@ -221,7 +219,7 @@ export function CategoryFormScreen({
               <Icon
                 as={mode === 'add' ? Plus : Check}
                 size={24}
-                className="text-background"
+                color={themeColors.background}
               />
             )}
           </Pressable>

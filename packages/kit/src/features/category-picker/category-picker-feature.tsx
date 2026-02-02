@@ -123,49 +123,49 @@ export function CategoryPickerFeature({
   };
 
   return (
-    <View className="flex-1 bg-background">
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       {/* Header */}
-      <View className="h-14 flex-row items-center justify-between px-4">
-        <Pressable onPress={onClose} className="p-2">
-          <Icon as={X} className="size-6 text-foreground" />
+      <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16 }}>
+        <Pressable onPress={onClose} style={{ padding: 8 }}>
+          <Icon as={X} size={24} color={colors.foreground} />
         </Pressable>
         <SegmentControl
           options={CATEGORY_TYPES}
           value={currentType}
           onValueChange={handleTypeChange}
         />
-        <Pressable onPress={onTransferPress} className="p-2">
-          <Icon as={ArrowLeftRight} className="size-6 text-foreground" />
+        <Pressable onPress={onTransferPress} style={{ padding: 8 }}>
+          <Icon as={ArrowLeftRight} size={24} color={colors.foreground} />
         </Pressable>
       </View>
 
       {/* Search */}
-      <View className="px-4 py-2">
-        <View className="flex-row items-center gap-2 rounded-full bg-muted px-4 py-2">
-          <Icon as={Search} className="size-4 text-muted-foreground" />
+      <View style={{ paddingHorizontal: 16, paddingVertical: 8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, borderRadius: 9999, backgroundColor: colors.muted, paddingHorizontal: 16, paddingVertical: 8 }}>
+          <Icon as={Search} size={16} color={colors.mutedForeground} />
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholder="Search categories"
             placeholderTextColor={colors.mutedForeground}
-            className="flex-1 bg-transparent text-base text-foreground"
+            style={{ flex: 1, backgroundColor: 'transparent', fontSize: 16, color: colors.foreground }}
           />
         </View>
       </View>
 
       {/* Categories Grid */}
-      <ScrollView className="flex-1 px-4">
+      <ScrollView style={{ flex: 1, paddingHorizontal: 16 }}>
         <SectionTitle
           title={currentType === 'expense' ? 'EXPENSE CATEGORIES' : 'INCOME CATEGORIES'}
         />
         {isLoading ? (
-          <View className="items-center py-8">
+          <View style={{ alignItems: 'center', paddingVertical: 32 }}>
             <ActivityIndicator size="small" />
           </View>
         ) : (
-          <View className="flex-row flex-wrap gap-4 py-4">
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16, paddingVertical: 16 }}>
             {filteredCategories.map((category) => (
-              <View key={category.id} className="w-[72px]">
+              <View key={category.id} style={{ width: 72 }}>
                 <CategoryItem
                   icon={category.icon}
                   label={category.label}

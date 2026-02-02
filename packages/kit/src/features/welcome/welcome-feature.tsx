@@ -1,4 +1,4 @@
-import { Button, Icon, Text } from '@rich-dime/component';
+import { Button, Icon, Text, useThemeColors } from '@rich-dime/component';
 import { Link } from 'expo-router';
 import { StarIcon } from 'lucide-react-native';
 import { Image, type ImageStyle, View } from 'react-native';
@@ -19,21 +19,22 @@ const IMAGE_STYLE: ImageStyle = {
  */
 export function WelcomeFeature() {
   const { theme } = useTheme();
+  const colors = useThemeColors();
 
   return (
-    <View className="flex-1 items-center justify-center gap-8 p-4">
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 32, padding: 16 }}>
       <Image source={LOGO[theme]} style={IMAGE_STYLE} resizeMode="contain" />
 
-      <View className="gap-2 p-4">
-        <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
+      <View style={{ gap: 8, padding: 16 }}>
+        <Text style={{ fontFamily: 'monospace', fontSize: 14 }} color={colors.mutedForeground}>
           1. Edit <Text variant="code">app/index.tsx</Text> to get started.
         </Text>
-        <Text className="ios:text-foreground font-mono text-sm text-muted-foreground">
+        <Text style={{ fontFamily: 'monospace', fontSize: 14 }} color={colors.mutedForeground}>
           2. Save to see your changes instantly.
         </Text>
       </View>
 
-      <View className="flex-row gap-2">
+      <View style={{ flexDirection: 'row', gap: 8 }}>
         <Link href="https://reactnativereusables.com" asChild>
           <Button>
             <Text>Browse the Docs</Text>
@@ -42,7 +43,7 @@ export function WelcomeFeature() {
         <Link href="https://github.com/founded-labs/react-native-reusables" asChild>
           <Button variant="ghost">
             <Text>Star the Repo</Text>
-            <Icon as={StarIcon} />
+            <Icon as={StarIcon} size={16} color={colors.foreground} />
           </Button>
         </Link>
       </View>

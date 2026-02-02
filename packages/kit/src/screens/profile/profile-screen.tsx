@@ -1,12 +1,14 @@
 // packages/kit/src/screens/profile/profile-screen.tsx
 import { View } from 'react-native';
-import { Text } from '@rich-dime/component';
+import { Text, useThemeColors } from '@rich-dime/component';
 import { ProfileFeature } from '../../features/profile';
 
 export function ProfileScreen() {
+  const colors = useThemeColors();
+
   return (
-    <View className="flex-1 p-4">
-      <Text className="text-2xl font-bold mb-4">Profile</Text>
+    <View style={{ flex: 1, padding: 16, backgroundColor: colors.background }}>
+      <Text style={{ fontSize: 24, fontWeight: '700', marginBottom: 16 }} color={colors.foreground}>Profile</Text>
       <ProfileFeature />
     </View>
   );

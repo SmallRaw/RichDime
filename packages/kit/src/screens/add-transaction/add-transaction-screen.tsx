@@ -387,16 +387,16 @@ export function AddTransactionScreen({
     >
       {/* Header */}
       <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16 }}>
-        <Pressable onPress={onClose} className="p-2">
-          <Icon as={X} className="size-6 text-foreground" />
+        <Pressable onPress={onClose} style={{ padding: 8 }}>
+          <Icon as={X} size={24} color={colors.foreground} />
         </Pressable>
         <SegmentControl
           options={TRANSACTION_TYPES}
           value={draft.type}
           onValueChange={handleTypeChange}
         />
-        <Pressable onPress={() => actions.setShowLoopPopover(true)} className="p-2">
-          <Icon as={RefreshCw} className={`size-6 ${hasRecurrence ? 'text-primary' : 'text-foreground'}`} />
+        <Pressable onPress={() => actions.setShowLoopPopover(true)} style={{ padding: 8 }}>
+          <Icon as={RefreshCw} size={24} color={hasRecurrence ? colors.primary : colors.foreground} />
         </Pressable>
       </View>
 
@@ -418,19 +418,29 @@ export function AddTransactionScreen({
             onPress={actions.deleteLastChar}
             style={{ height: 44, width: 44, alignItems: 'center', justifyContent: 'center', borderRadius: 9999, borderWidth: 0.5, borderColor: colors.border, backgroundColor: colors.card }}
           >
-            <Icon as={Delete} className="size-5 text-muted-foreground" />
+            <Icon as={Delete} size={20} color={colors.mutedForeground} />
           </Pressable>
         </Animated.View>
 
         {/* Add Note Button */}
         <Pressable
           onPress={handleStartEditNote}
-          className="flex-row items-center gap-2 rounded-full border-hairline border-border bg-card px-4 py-2"
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 8,
+            borderRadius: 9999,
+            borderWidth: 0.5,
+            borderColor: colors.border,
+            backgroundColor: colors.card,
+            paddingHorizontal: 16,
+            paddingVertical: 8,
+          }}
         >
-          <Icon as={Menu} className="size-4 text-muted-foreground" />
+          <Icon as={Menu} size={16} color={colors.mutedForeground} />
           <View>
             <Text
-              className="absolute text-sm opacity-0"
+              style={{ position: 'absolute', fontSize: 14, opacity: 0 }}
               onLayout={(e) => {
                 const measured = Math.ceil(e.nativeEvent.layout.width);
                 actions.setNoteInputWidth(Math.max(62, measured + 2));
@@ -446,8 +456,12 @@ export function AddTransactionScreen({
               editable={draft.isEditingNote}
               placeholder="Add Note"
               placeholderTextColor={colors.mutedForeground}
-              className="m-0 border-0 bg-transparent p-0 text-center text-sm"
               style={{
+                margin: 0,
+                padding: 0,
+                backgroundColor: 'transparent',
+                textAlign: 'center',
+                fontSize: 14,
                 color: draft.note ? colors.foreground : colors.mutedForeground,
                 width: draft.noteInputWidth,
               }}
@@ -457,22 +471,32 @@ export function AddTransactionScreen({
       </View>
 
       {/* Bottom Section - design: padding [16, 16, 32, 16], gap-4 */}
-      <View className="gap-4 px-4 pt-4" style={{ paddingBottom: Math.max(32, insets.bottom + 16) }}>
+      <View style={{ gap: 16, paddingHorizontal: 16, paddingTop: 16, paddingBottom: Math.max(32, insets.bottom + 16) }}>
         {/* Suggestion Chips */}
         {suggestions.length > 0 && (
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerClassName="gap-2"
+            contentContainerStyle={{ gap: 8 }}
           >
             {suggestions.map((suggestion, index) => (
               <Pressable
                 key={`${suggestion.note}-${index}`}
                 onPress={() => handleSelectSuggestion(suggestion)}
-                className="flex-row items-center gap-1 rounded-full border border-border bg-background px-3 py-2"
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 4,
+                  borderRadius: 9999,
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                  backgroundColor: colors.background,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                }}
               >
-                <Text className="text-sm text-foreground">{suggestion.note}</Text>
-                <Text className="text-xs text-muted-foreground">
+                <Text style={{ fontSize: 14 }} color={colors.foreground}>{suggestion.note}</Text>
+                <Text style={{ fontSize: 12 }} color={colors.mutedForeground}>
                   ¥{(suggestion.amount / 100).toFixed(suggestion.amount % 100 === 0 ? 0 : 2)}
                 </Text>
               </Pressable>
@@ -482,33 +506,33 @@ export function AddTransactionScreen({
 
         {/* Selectors Row */}
         {isTransfer ? (
-          <View className="w-full gap-3">
-            <View className="flex-row items-center gap-3">
+          <View style={{ width: '100%', gap: 12 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
               <Pressable
                 onPress={() => actions.setShowAccountPicker('source')}
-                className="flex-1 flex-row items-center justify-center gap-2 rounded-full border border-border px-4 py-3"
+                style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderRadius: 9999, borderWidth: 1, borderColor: colors.border, paddingHorizontal: 16, paddingVertical: 12 }}
               >
-                <Icon as={Wallet} className="size-4 text-foreground" />
-                <Text className="text-sm font-medium text-foreground">{sourceAccountName}</Text>
+                <Icon as={Wallet} size={16} color={colors.foreground} />
+                <Text style={{ fontSize: 14, fontWeight: '500' }} color={colors.foreground}>{sourceAccountName}</Text>
               </Pressable>
-              <Icon as={ArrowRightLeft} className="size-4 text-muted-foreground" />
+              <Icon as={ArrowRightLeft} size={16} color={colors.mutedForeground} />
               <Pressable
                 onPress={() => actions.setShowAccountPicker('target')}
-                className="flex-1 flex-row items-center justify-center gap-2 rounded-full border border-border px-4 py-3"
+                style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderRadius: 9999, borderWidth: 1, borderColor: colors.border, paddingHorizontal: 16, paddingVertical: 12 }}
               >
-                <Icon as={Wallet} className={`size-4 ${draft.toAccountId ? 'text-foreground' : 'text-muted-foreground'}`} />
-                <Text className={`text-sm font-medium ${draft.toAccountId ? 'text-foreground' : 'text-muted-foreground'}`}>
+                <Icon as={Wallet} size={16} color={draft.toAccountId ? colors.foreground : colors.mutedForeground} />
+                <Text style={{ fontSize: 14, fontWeight: '500' }} color={draft.toAccountId ? colors.foreground : colors.mutedForeground}>
                   {targetAccountName}
                 </Text>
               </Pressable>
             </View>
             <Pressable
               onPress={() => actions.setShowDatePicker(true)}
-              className="flex-row items-center justify-center gap-2 rounded-full border border-border px-4 py-3"
+              style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderRadius: 9999, borderWidth: 1, borderColor: colors.border, paddingHorizontal: 16, paddingVertical: 12 }}
             >
-              <Icon as={Calendar} className="size-4 text-foreground" />
-              <Text className="text-sm font-medium text-foreground">{dateDisplay.dateText}</Text>
-              <Text className="text-sm font-normal text-foreground">{dateDisplay.timeText}</Text>
+              <Icon as={Calendar} size={16} color={colors.foreground} />
+              <Text style={{ fontSize: 14, fontWeight: '500' }} color={colors.foreground}>{dateDisplay.dateText}</Text>
+              <Text style={{ fontSize: 14 }} color={colors.foreground}>{dateDisplay.timeText}</Text>
             </Pressable>
           </View>
         ) : (
@@ -517,20 +541,20 @@ export function AddTransactionScreen({
             {/* Date Selector - design: rounded-full, bg-card, border 0.5px, gap-2, padding [12, 16] */}
             <Pressable
               onPress={() => actions.setShowDatePicker(true)}
-              className="flex-row items-center gap-2 rounded-full border-hairline border-border bg-card px-4 py-3"
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 8, borderRadius: 9999, borderWidth: 0.5, borderColor: colors.border, backgroundColor: colors.card, paddingHorizontal: 16, paddingVertical: 12 }}
             >
-              <Icon as={Calendar} className="size-4 text-foreground" />
-              <Text className="text-sm font-sans-medium text-foreground">{dateDisplay.dateText}</Text>
-              <Text className="text-sm font-sans text-foreground">{dateDisplay.timeText}</Text>
+              <Icon as={Calendar} size={16} color={colors.foreground} />
+              <Text style={{ fontSize: 14, fontFamily: 'NotoSansSC_500Medium' }} color={colors.foreground}>{dateDisplay.dateText}</Text>
+              <Text style={{ fontSize: 14 }} color={colors.foreground}>{dateDisplay.timeText}</Text>
             </Pressable>
             {/* Category Selector - design: rounded-full, bg-card, border 0.5px, gap-2, padding [12, 16] */}
             <Animated.View style={{ transform: [{ translateX: categoryShakeX }] }}>
               <Pressable
                 onPress={() => actions.setShowCategoryPopover(true)}
-                className="flex-row items-center gap-2 rounded-full border-hairline border-border bg-card px-4 py-3"
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 8, borderRadius: 9999, borderWidth: 0.5, borderColor: colors.border, backgroundColor: colors.card, paddingHorizontal: 16, paddingVertical: 12 }}
               >
-                <Icon as={Grid2x2} className={`size-4 ${hasCategory ? 'text-foreground' : 'text-muted-foreground'}`} />
-                <Text className={`text-sm font-sans ${hasCategory ? 'text-foreground' : 'text-muted-foreground'}`}>
+                <Icon as={Grid2x2} size={16} color={hasCategory ? colors.foreground : colors.mutedForeground} />
+                <Text style={{ fontSize: 14 }} color={hasCategory ? colors.foreground : colors.mutedForeground}>
                   {categoryName}
                 </Text>
               </Pressable>
@@ -547,7 +571,7 @@ export function AddTransactionScreen({
         />
 
         {isSubmitting && (
-          <View className="absolute inset-0 items-center justify-center bg-background/50">
+          <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: `${colors.background}80` }}>
             <ActivityIndicator size="large" />
           </View>
         )}
@@ -593,11 +617,11 @@ export function AddTransactionScreen({
         onRequestClose={() => actions.setShowAccountPicker(null)}
       >
         <Pressable
-          className="flex-1 bg-black/40"
+          style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.4)' }}
           onPress={() => actions.setShowAccountPicker(null)}
         />
-        <View className="rounded-t-3xl bg-background px-4 pb-8 pt-4">
-          <Text className="mb-4 text-center text-base font-semibold text-foreground">
+        <View style={{ borderTopLeftRadius: 24, borderTopRightRadius: 24, backgroundColor: colors.background, paddingHorizontal: 16, paddingBottom: 32, paddingTop: 16 }}>
+          <Text style={{ marginBottom: 16, textAlign: 'center', fontSize: 16, fontWeight: '600' }} color={colors.foreground}>
             {draft.showAccountPicker === 'source' ? '选择来源账户' : '选择目标账户'}
           </Text>
           {(draft.showAccountPicker === 'target' ? targetAccounts : accounts.filter((a) => !a.isArchived)).map((account) => {
@@ -608,14 +632,14 @@ export function AddTransactionScreen({
               <Pressable
                 key={account.id}
                 onPress={() => actions.selectAccount(account.id)}
-                className={`flex-row items-center gap-3 rounded-xl px-4 py-3 ${isSelected ? 'bg-primary/10' : ''}`}
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 12, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: isSelected ? `${colors.primary}1A` : 'transparent' }}
               >
-                <Icon as={Wallet} className={`size-5 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
-                <Text className={`flex-1 text-base ${isSelected ? 'font-semibold text-primary' : 'text-foreground'}`}>
+                <Icon as={Wallet} size={20} color={isSelected ? colors.primary : colors.mutedForeground} />
+                <Text style={{ flex: 1, fontSize: 16, fontWeight: isSelected ? '600' : '400' }} color={isSelected ? colors.primary : colors.foreground}>
                   {account.name}
                 </Text>
                 {isSelected && (
-                  <Text className="text-sm text-primary">✓</Text>
+                  <Text style={{ fontSize: 14 }} color={colors.primary}>✓</Text>
                 )}
               </Pressable>
             );

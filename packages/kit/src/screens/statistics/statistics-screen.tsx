@@ -260,6 +260,7 @@ interface BarChartProps {
 }
 
 function BarChart({ period, data, activeIndex, activeColor, inactiveColor }: BarChartProps) {
+  const colors = useThemeColors();
   const barStyle = getChartBarStyle(period);
   const maxValue = Math.max(...data.map((d) => d.value), 0.01);
 
@@ -297,12 +298,8 @@ function BarChart({ period, data, activeIndex, activeColor, inactiveColor }: Bar
               return (
                 <View key={`label-${index}`} style={{ width: barStyle.width, alignItems: 'center' }}>
                   <Text
-                    style={{ fontSize: 11 }}
-                    className={
-                      isActive
-                        ? 'font-medium text-foreground'
-                        : 'text-muted-foreground'
-                    }
+                    style={{ fontSize: 11, fontWeight: isActive ? '500' : '400' }}
+                    color={isActive ? colors.foreground : colors.mutedForeground}
                   >
                     {item.label}
                   </Text>
@@ -315,12 +312,8 @@ function BarChart({ period, data, activeIndex, activeColor, inactiveColor }: Bar
               return (
                 <Text
                   key={`mlabel-${label}`}
-                  style={{ fontSize: 11 }}
-                  className={
-                    isActive
-                      ? 'font-medium text-foreground'
-                      : 'text-muted-foreground'
-                  }
+                  style={{ fontSize: 11, fontWeight: isActive ? '500' : '400' }}
+                  color={isActive ? colors.foreground : colors.mutedForeground}
                 >
                   {label}
                 </Text>
@@ -352,6 +345,7 @@ const DONUT_STROKE = 12;
 const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
 
 function DonutChart({ segments, totalAmount, selectedCategoryId, selectedAmount, selectedName, onPress }: DonutChartProps) {
+  const colors = useThemeColors();
   let cumulativeOffset = 0;
 
   return (
@@ -392,10 +386,10 @@ function DonutChart({ segments, totalAmount, selectedCategoryId, selectedAmount,
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           pointerEvents="none"
         >
-          <Text style={{ fontSize: 11 }} className="font-semibold text-foreground">
+          <Text style={{ fontSize: 11, fontWeight: '600' }} color={colors.foreground}>
             ¥{formatMoney(selectedAmount ?? totalAmount)}
           </Text>
-          <Text style={{ fontSize: 9 }} className="text-muted-foreground">
+          <Text style={{ fontSize: 9 }} color={colors.mutedForeground}>
             {selectedName ?? '总支出'}
           </Text>
         </YStack>
@@ -415,6 +409,7 @@ interface CategoryFilterItemProps {
 
 // Category item with colored block on top, name and percentage below (horizontal scroll layout)
 function CategoryFilterItem({ categoryId, name, percentage, color, isSelected, onPress }: CategoryFilterItemProps) {
+  const colors = useThemeColors();
   return (
     <Pressable onPress={() => onPress(categoryId)}>
       <View
@@ -439,13 +434,13 @@ function CategoryFilterItem({ categoryId, name, percentage, color, isSelected, o
         {/* Category name */}
         <Text
           style={{ fontSize: 10 }}
-          className="text-muted-foreground"
+          color={colors.mutedForeground}
           numberOfLines={1}
         >
           {name}
         </Text>
         {/* Percentage */}
-        <Text style={{ fontSize: 10 }} className="font-medium text-foreground">
+        <Text style={{ fontSize: 10, fontWeight: '500' }} color={colors.foreground}>
           {Math.round(percentage)}%
         </Text>
       </View>
@@ -632,27 +627,27 @@ export function StatisticsScreen({
       {/* Content - swipeable */}
       <View style={{ flex: 1 }} {...panResponder.panHandlers}>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-        <View className="gap-4">
+        <View style={{ gap: 16 }}>
           {/* Overview Row */}
           <View style={{ paddingHorizontal: 16 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               {/* Left - Expense */}
               <View style={{ gap: 4 }}>
-                <Text style={{ fontSize: 11 }} className="text-muted-foreground">
+                <Text style={{ fontSize: 11 }} color={colors.mutedForeground}>
                   {labels.expense}
                 </Text>
                 <View style={{ flexDirection: 'row', gap: 8, alignItems: 'baseline' }}>
-                  <Text style={{ fontSize: 24 }} className="font-bold text-foreground">
+                  <Text style={{ fontSize: 24, fontWeight: '700' }} color={colors.foreground}>
                     ¥{formatMoney(totalExpense)}
                   </Text>
                 </View>
               </View>
               {/* Right - Balance */}
               <View style={{ gap: 4, alignItems: 'flex-end' }}>
-                <Text style={{ fontSize: 11 }} className="text-muted-foreground">
+                <Text style={{ fontSize: 11 }} color={colors.mutedForeground}>
                   {labels.balance}
                 </Text>
-                <Text style={{ fontSize: 15 }} className="font-semibold text-foreground">
+                <Text style={{ fontSize: 15, fontWeight: '600' }} color={colors.foreground}>
                   ¥{formatMoney(netAmount)}
                 </Text>
               </View>
@@ -663,10 +658,10 @@ export function StatisticsScreen({
           <View style={{ gap: 12, paddingHorizontal: 16 }}>
             {/* Chart Header */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: 13 }} className="font-semibold text-foreground">
+              <Text style={{ fontSize: 13, fontWeight: '600' }} color={colors.foreground}>
                 支出趋势
               </Text>
-              <Text style={{ fontSize: 11 }} className="text-muted-foreground">
+              <Text style={{ fontSize: 11 }} color={colors.mutedForeground}>
                 {headerTitle}
               </Text>
             </View>
@@ -682,13 +677,13 @@ export function StatisticsScreen({
 
           {/* Category Section */}
           <View style={{ gap: 12, paddingHorizontal: 16 }}>
-            <Text style={{ fontSize: 13 }} className="font-semibold text-foreground">
+            <Text style={{ fontSize: 13, fontWeight: '600' }} color={colors.foreground}>
               支出分类
             </Text>
             {categoryLoading ? (
               <ActivityIndicator size="small" />
             ) : categoryStats.length === 0 ? (
-              <Text style={{ fontSize: 11 }} className="text-muted-foreground">
+              <Text style={{ fontSize: 11 }} color={colors.mutedForeground}>
                 暂无分类数据
               </Text>
             ) : (
@@ -733,10 +728,10 @@ export function StatisticsScreen({
           <View style={{ gap: 16, paddingHorizontal: 16, paddingBottom: 32 }}>
             {/* Header */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <Text style={{ fontSize: 13 }} className="font-semibold text-foreground">
+              <Text style={{ fontSize: 13, fontWeight: '600' }} color={colors.foreground}>
                 {selectedCategoryStat ? `${selectedCategoryStat.categoryName}明细` : '交易明细'}
               </Text>
-              <Text style={{ fontSize: 11 }} className="text-muted-foreground">
+              <Text style={{ fontSize: 11 }} color={colors.mutedForeground}>
                 按金额排序
               </Text>
             </View>

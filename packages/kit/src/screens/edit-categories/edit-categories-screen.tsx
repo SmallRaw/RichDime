@@ -11,6 +11,7 @@ import {
   EmptyState,
   CategoryListItem,
   CategorySuggestedItem,
+  useThemeColors,
 } from '@rich-dime/component';
 import {
   ChevronDown,
@@ -112,6 +113,7 @@ export function EditCategoriesScreen({
   onEditCategory,
 }: EditCategoriesScreenProps) {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
   const [activeTab, setActiveTab] = useState<'expense' | 'income'>('expense');
   const [isSortMode, setIsSortMode] = useState(false);
 
@@ -173,48 +175,48 @@ export function EditCategoriesScreen({
   const isEmpty = currentCategories.length === 0;
 
   return (
-    <View className="flex-1 bg-background" style={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, borderTopLeftRadius: 16, borderTopRightRadius: 16 }}>
       {/* Drag Indicator */}
-      <View className="items-center justify-center px-4 py-3">
-        <View className="h-1 w-9 rounded-full bg-border" />
+      <View style={{ alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16, paddingVertical: 12 }}>
+        <View style={{ height: 4, width: 36, borderRadius: 9999, backgroundColor: colors.border }} />
       </View>
 
       {/* Header */}
-      <View className="flex-row items-center justify-between px-4 py-3">
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12 }}>
         <Pressable
           onPress={onClose}
-          className="h-10 w-10 items-center justify-center"
+          style={{ height: 40, width: 40, alignItems: 'center', justifyContent: 'center' }}
         >
-          <Icon as={ChevronDown} size={24} className="text-foreground" />
+          <Icon as={ChevronDown} size={24} color={colors.foreground} />
         </Pressable>
         <Text variant="title">Categories</Text>
         <Pressable
           onPress={handleToggleSort}
-          className="h-10 w-10 items-center justify-center"
+          style={{ height: 40, width: 40, alignItems: 'center', justifyContent: 'center' }}
         >
           <Icon
             as={ArrowUpDown}
             size={22}
-            className="text-foreground"
+            color={colors.foreground}
           />
         </Pressable>
       </View>
 
       {/* Content */}
-      <ScrollView className="flex-1">
+      <ScrollView style={{ flex: 1 }}>
         <SectionTitle title={sectionTitle} />
 
         {isEmpty ? (
           /* Empty State */
-          <View className="mx-4 items-center gap-3 rounded-xl bg-muted px-4 py-8">
-            <View className="h-12 w-12 items-center justify-center rounded-xl bg-background">
+          <View style={{ marginHorizontal: 16, alignItems: 'center', gap: 12, borderRadius: 12, backgroundColor: colors.muted, paddingHorizontal: 16, paddingVertical: 32 }}>
+            <View style={{ height: 48, width: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 12, backgroundColor: colors.background }}>
               <Icon
                 as={Wallet}
                 size={28}
-                className="text-muted-foreground"
+                color={colors.mutedForeground}
               />
             </View>
-            <Text variant="caption" className="text-center">
+            <Text variant="caption" style={{ textAlign: 'center' }}>
               No {activeTab} categories found, click the 'New' button to add
               some
             </Text>
@@ -246,7 +248,7 @@ export function EditCategoriesScreen({
         )}
 
         {/* Spacer */}
-        <View className="h-4 bg-muted" />
+        <View style={{ height: 16, backgroundColor: colors.muted }} />
 
         {/* Suggested Section */}
         {suggestedCategories.length > 0 && (
@@ -267,8 +269,7 @@ export function EditCategoriesScreen({
 
       {/* Footer */}
       <View
-        className="flex-row items-center justify-between border-t border-border px-4 py-3"
-        style={{ paddingBottom: Math.max(insets.bottom, 12) }}
+        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: colors.border, paddingHorizontal: 16, paddingVertical: 12, paddingBottom: Math.max(insets.bottom, 12) }}
       >
         <SegmentControl
           options={TAB_OPTIONS}
@@ -277,14 +278,14 @@ export function EditCategoriesScreen({
         />
         <Pressable
           onPress={onAddCategory}
-          className="flex-row items-center gap-1 rounded-full bg-foreground px-4 py-2"
+          style={{ flexDirection: 'row', alignItems: 'center', gap: 4, borderRadius: 9999, backgroundColor: colors.foreground, paddingHorizontal: 16, paddingVertical: 8 }}
         >
           <Icon
             as={Plus}
             size={16}
-            className="text-background"
+            color={colors.background}
           />
-          <Text variant="labelMedium" className="text-background">
+          <Text variant="labelMedium" color={colors.background}>
             New
           </Text>
         </Pressable>

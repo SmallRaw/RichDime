@@ -1,8 +1,9 @@
 import { View } from 'react-native';
-import { Text, Button } from '@rich-dime/component';
+import { Text, Button, useThemeColors } from '@rich-dime/component';
 import { useProfile } from './use-profile';
 
 export function ProfileFeature() {
+  const colors = useThemeColors();
   const { user, loading, refresh } = useProfile();
 
   if (loading) {
@@ -10,9 +11,9 @@ export function ProfileFeature() {
   }
 
   return (
-    <View className="gap-4 p-4">
-      <Text className="text-xl font-bold">{user?.name}</Text>
-      <Text className="text-muted-foreground">{user?.email}</Text>
+    <View style={{ gap: 16, padding: 16 }}>
+      <Text style={{ fontSize: 20, fontWeight: '700' }} color={colors.foreground}>{user?.name}</Text>
+      <Text color={colors.mutedForeground}>{user?.email}</Text>
       <Button onPress={refresh}>
         <Text>Refresh Profile</Text>
       </Button>

@@ -1,4 +1,4 @@
-import { Button, Text } from '@rich-dime/component';
+import { Button, Text, useThemeColors } from '@rich-dime/component';
 import { View } from 'react-native';
 import { Link } from '../../navigation/link';
 
@@ -7,10 +7,12 @@ import { Link } from '../../navigation/link';
  * Displayed when user navigates to a non-existent route
  */
 export function NotFoundScreen() {
+  const colors = useThemeColors();
+
   return (
-    <View className="flex-1 items-center justify-center gap-4 p-4">
-      <Text className="text-4xl font-bold">404</Text>
-      <Text className="text-xl text-muted-foreground">
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16, padding: 16, backgroundColor: colors.background }}>
+      <Text style={{ fontSize: 36, fontWeight: '700' }} color={colors.foreground}>404</Text>
+      <Text style={{ fontSize: 20 }} color={colors.mutedForeground}>
         This screen doesn't exist.
       </Text>
 

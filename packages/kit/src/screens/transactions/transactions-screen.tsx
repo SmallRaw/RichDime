@@ -98,7 +98,7 @@ export function TransactionsScreen({
   }, []);
 
   return (
-    <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, paddingTop: insets.top }}>
       {/* Header */}
       {isSearching ? (
         <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16 }}>
@@ -111,20 +111,20 @@ export function TransactionsScreen({
             autoFocus
           />
           <Pressable onPress={handleSearchClose} style={{ padding: 8 }}>
-            <Icon as={X} className="size-6 text-foreground" />
+            <Icon as={X} size={24} color={colors.foreground} />
           </Pressable>
         </View>
       ) : (
         <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16 }}>
           <Pressable onPress={handleSearchOpen} style={{ padding: 8 }}>
-            <Icon as={Search} className="size-6 text-foreground" />
+            <Icon as={Search} size={24} color={colors.foreground} />
           </Pressable>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable style={{ padding: 8 }}>
-              <Icon as={SlidersHorizontal} className="size-6 text-foreground" />
+              <Icon as={SlidersHorizontal} size={24} color={colors.foreground} />
             </Pressable>
             <Pressable style={{ padding: 8 }} onPress={() => setShowSettingsMenu(true)}>
-              <Icon as={Settings} className="size-6 text-foreground" />
+              <Icon as={Settings} size={24} color={colors.foreground} />
             </Pressable>
           </View>
         </View>
@@ -155,16 +155,24 @@ export function TransactionsScreen({
         onRequestClose={() => setShowSettingsMenu(false)}
       >
         <Pressable
-          className="flex-1 bg-black/50"
+          style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}
           onPress={() => setShowSettingsMenu(false)}
         >
           <View
-            className="absolute right-4 bg-card rounded-xl shadow-lg overflow-hidden border border-border"
-            style={{ top: insets.top + 56 }}
+            style={{
+              position: 'absolute',
+              right: 16,
+              top: insets.top + 56,
+              backgroundColor: colors.card,
+              borderRadius: 12,
+              overflow: 'hidden',
+              borderWidth: 1,
+              borderColor: colors.border,
+            }}
           >
             {/* Theme Toggle */}
             <Pressable
-              className="flex-row items-center px-4 py-3 active:bg-muted"
+              style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12 }}
               onPress={() => {
                 toggleTheme();
                 setShowSettingsMenu(false);
@@ -172,9 +180,11 @@ export function TransactionsScreen({
             >
               <Icon
                 as={colors.isDark ? Sun : Moon}
-                className="size-5 text-foreground mr-3"
+                size={20}
+                color={colors.foreground}
+                style={{ marginRight: 12 }}
               />
-              <Text className="text-foreground">
+              <Text color={colors.foreground}>
                 {colors.isDark ? '浅色模式' : '深色模式'}
               </Text>
             </Pressable>
@@ -182,14 +192,14 @@ export function TransactionsScreen({
             {/* Storybook - Only in DEV */}
             {__DEV__ && (
               <Pressable
-                className="flex-row items-center px-4 py-3 active:bg-muted border-t border-border"
+                style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, borderTopWidth: 1, borderTopColor: colors.border }}
                 onPress={() => {
                   setShowSettingsMenu(false);
                   router.push('/storybook');
                 }}
               >
-                <Icon as={BookOpen} className="size-5 text-foreground mr-3" />
-                <Text className="text-foreground">Storybook</Text>
+                <Icon as={BookOpen} size={20} color={colors.foreground} style={{ marginRight: 12 }} />
+                <Text color={colors.foreground}>Storybook</Text>
               </Pressable>
             )}
           </View>

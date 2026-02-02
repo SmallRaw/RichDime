@@ -232,7 +232,7 @@ export function TransactionListFeature({
 
   return (
     <ScrollView
-      className="flex-1"
+      style={{ flex: 1 }}
       onScroll={handleScroll}
       scrollEventThrottle={400}
       refreshControl={
@@ -267,7 +267,7 @@ export function TransactionListFeature({
         );
       })}
       {pagination.hasMore && (
-        <View className="items-center py-4">
+        <View style={{ alignItems: 'center', paddingVertical: 16 }}>
           <ActivityIndicator size="small" />
         </View>
       )}
