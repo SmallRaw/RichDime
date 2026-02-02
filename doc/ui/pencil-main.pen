@@ -3538,7 +3538,7 @@
                   "type": "ref",
                   "ref": "C3KOZ",
                   "x": 24,
-                  "y": 24.01994370166805,
+                  "y": 24.019943701668048,
                   "width": "fill_container",
                   "descendants": {
                     "NEMHS": {
@@ -5675,7 +5675,7 @@
                   "lineHeight": 1.3,
                   "fontFamily": "Inter",
                   "fontSize": "$--text-xs",
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -5706,7 +5706,7 @@
                   "lineHeight": 1.3,
                   "fontFamily": "Inter",
                   "fontSize": "$--text-xs",
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -5737,7 +5737,7 @@
                   "lineHeight": 1.3,
                   "fontFamily": "Inter",
                   "fontSize": "$--text-xs",
-                  "fontWeight": "500"
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -13760,17 +13760,6 @@
       ]
     },
     {
-      "type": "text",
-      "id": "AMAbW",
-      "x": 5346.967484952917,
-      "y": 432.06032180670746,
-      "fill": "#000000",
-      "content": "继续根据 UI 设计，1:1 把这个“天天交易”的视图、每个可点击的子页面以及每个 Pop-up（弹窗）全都检查一遍。\n\n请帮我确认：\n1. 如果有边距问题，或者哪里有问题的，就给我做上修正\n2. 发现问题后直接帮我加上",
-      "fontFamily": "Inter",
-      "fontSize": 12,
-      "fontWeight": "normal"
-    },
-    {
       "type": "frame",
       "id": "kE8jd",
       "x": 6400,
@@ -15340,6 +15329,14 @@
     "--text-5xl": {
       "type": "number",
       "value": 48
+    },
+    "--text-badge": {
+      "type": "number",
+      "value": 12
+    },
+    "--text-emoji": {
+      "type": "number",
+      "value": 22
     }
   }
 }
