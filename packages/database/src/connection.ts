@@ -5,7 +5,7 @@
 import * as SQLite from 'expo-sqlite';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import type { ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
-import { v4 as uuid } from 'uuid';
+import * as Crypto from 'expo-crypto';
 import { INIT_SCHEMA, SCHEMA_VERSION, DEFAULT_CATEGORIES, DEFAULT_ACCOUNTS } from './migrations/schema';
 import { now } from './utils/date';
 import * as schema from './schema';
@@ -149,7 +149,7 @@ async function insertDefaultAccounts(db: SQLite.SQLiteDatabase): Promise<void> {
  * 生成 UUID
  */
 export function generateId(): string {
-  return uuid();
+  return Crypto.randomUUID();
 }
 
 /**

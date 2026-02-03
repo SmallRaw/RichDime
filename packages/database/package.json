@@ -14,11 +14,10 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1",
-    "expo-sqlite": "~15.2.1",
-    "uuid": "^11.1.0"
+    "expo-crypto": "~15.0.2",
+    "expo-sqlite": "~15.2.1"
   },
   "devDependencies": {
-    "@types/uuid": "^10.0.0",
     "drizzle-kit": "^0.31.8",
     "typescript": "~5.9.2"
   },
