@@ -213,7 +213,8 @@ function DateTimePicker({ visible, date, onDateChange, onClose }: DateTimePicker
     const result = new Date(dateOption.date);
     result.setHours(selectedHour.current, selectedMinute.current, 0, 0);
     onDateChange(result);
-  }, [onDateChange]);
+    onClose();
+  }, [onDateChange, onClose]);
 
   if (!visible) return null;
 
