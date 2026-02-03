@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { View, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, ScrollView, ActivityIndicator, RefreshControl, Alert } from 'react-native';
 import {
   TransactionItem,
   DateHeader,
@@ -131,9 +131,11 @@ export function TransactionListFeature({
     refresh,
     loadMore,
     pagination,
+    removeTx,
   } = useTransactions(filter);
   const { categories } = useCategories();
   const { accounts } = useAccounts();
+
 
   // 构建分类映射
   const categoryMap = useMemo(() => {
@@ -206,6 +208,33 @@ export function TransactionListFeature({
     }
   }, [pagination.hasMore, loadMore]);
 
+  // 处理长按删除
+  const handleLongPress = useCallback((transaction: Transaction) => {
+    const cat = categoryMap.get(transaction.categoryId);
+    const categoryName = cat?.name ?? '未分类';
+    const amount = formatAmountDisplay(transaction);
+
+    Alert.alert(
+      '删除交易',
+      `确定要删除 ${categoryName} ${amount} 吗？`,
+      [
+        { text: '取消', style: 'cancel' },
+        {
+          text: '删除',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await removeTx(transaction.id);
+            } catch (err: any) {
+              Alert.alert('删除失败', err?.message ?? '请重试');
+            }
+          },
+        },
+      ]
+    );
+  }, [categoryMap, formatAmountDisplay, removeTx]);
+
+
   if (isLoading && groups.length === 0) {
     return <LoadingState />;
   }
@@ -260,6 +289,8 @@ export function TransactionListFeature({
                   account={getAccountDisplay(transaction)}
                   variant={TYPE_VARIANTS[transaction.type]}
                   onPress={() => onTransactionPress?.(transaction.id)}
+                  onLongPress={() => handleLongPress(transaction)}
+                  delayLongPress={300}
                 />
               );
             })}
@@ -271,6 +302,7 @@ export function TransactionListFeature({
           <ActivityIndicator size="small" />
         </View>
       )}
+
     </ScrollView>
   );
 }
