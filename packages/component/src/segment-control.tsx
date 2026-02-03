@@ -60,6 +60,11 @@ function SegmentControl({
           <Pressable
             key={option.value}
             onPress={() => onValueChange(option.value)}
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel={option.label}
+            accessibilityState={{ selected: isActive }}
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
             style={[
               {
                 alignItems: 'center',
